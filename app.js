@@ -1,8 +1,9 @@
-const express = require("express");
 const bodyParser = require("body-parser");
-const request = require("request");
-const https = require("https");
 const { response } = require("express");
+const request = require("request");
+const express = require("express");
+const https = require("https");
+const port = 3000;
 
 const app = express();
 
@@ -13,7 +14,7 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", function (req, res) {
-    res.sendFile(__dirname + "/signup.html");
+    res.sendFile(__dirname + "/index.html");
 });
 
 app.post("/", function (req, res) {
@@ -66,7 +67,6 @@ app.post("/", function (req, res) {
     /* Envia os dados obtidos do form para o servidor Mailchimp */
     request.write(jsonData);
     request.end();
-
 });
 
 app.post("/home", function (req, res) {
@@ -79,7 +79,6 @@ app.post("/home", function (req, res) {
 app.listen(process.env.PORT || 3000, function () {
     console.log("Server is running on port: " + port);
 });
-
 
 
 /* Mailchimp Endpoint */
